@@ -1,0 +1,22 @@
+{
+  "name": "d3v4",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "browser-sync start -s -f index.html src --no-ui --no-notify"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhentian-wan/d3v4.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zhentian-wan/d3v4/issues"
+  },
+  "homepage": "https://github.com/zhentian-wan/d3v4#readme",
+  "devDependencies": {
+    "browser-sync": "^2.17.5"
+  }
+}
