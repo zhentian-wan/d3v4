@@ -20,7 +20,21 @@ const bars = d3.select('.chart')
 
 bars.append('rect')
     .attr('width', d => d.score)
-    .attr('class', 'bar');
+    .attr('class', 'bar')
+    .on('mouseover', function(d, i, elements) {
+        // transform the hover item to scale 1.1
+        d3.select(this).classed('barOn', true);
+
+        // set not hover elements to opacity 0.8
+        d3.selectAll(elements)
+            .filter(':not(:hover)')
+            .style('opacity', 0.6);
+    })
+    .on('mouseout', function(d, i, elements) {
+        d3.select(this).classed('barOn', false);
+        d3.selectAll(elements)
+            .style('opacity', 1);
+    });
 
 bars.append('text')
     .text(d => d.name)  
