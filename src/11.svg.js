@@ -6,6 +6,14 @@ var scores = [
   { name: 'Emily', score: 88 }
 ];
 
+function barOn(selection, onOff) {
+    selection.classed('barOn', onOff);
+}
+
+function opacity(selection, opacity) {
+    selection.style('opacity', opacity);  
+}
+
 const bars = d3.select('.chart')
     .append('svg')
         .attr('width', 300)
@@ -23,17 +31,17 @@ bars.append('rect')
     .attr('class', 'bar')
     .on('mouseover', function(d, i, elements) {
         // transform the hover item to scale 1.1
-        d3.select(this).classed('barOn', true);
+        d3.select(this).call(barOn, true);
 
         // set not hover elements to opacity 0.8
         d3.selectAll(elements)
             .filter(':not(:hover)')
-            .style('opacity', 0.6);
+            .call(opacity, 0.6);
     })
     .on('mouseout', function(d, i, elements) {
-        d3.select(this).classed('barOn', false);
+        d3.select(this).call(barOn, false);
         d3.selectAll(elements)
-            .style('opacity', 1);
+            .call(opacity, 1);
     });
 
 bars.append('text')
