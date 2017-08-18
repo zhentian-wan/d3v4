@@ -62,7 +62,7 @@ d3.json('../data/data3.json', function (err, data) {
         .attr('text-anchor', 'end')
         .attr('transform', 'rotate(-45)');
 
-    console.log("yScale(yScale.domain()[0])", yScale(yScale.domain()[0])); //680
+    console.log("yScale(yScale.domain()[0])", yScale(yScale.domain()[0])); //yScale(680)-->525
     /**
      * Creat area chart
      */    
