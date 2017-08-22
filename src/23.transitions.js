@@ -1,15 +1,15 @@
 d3.select('#block')
     .transition()
-        .duration(600)
-        .ease(d3.easePolyOut)
-        .delay(200)
+        .call(configure, 200, 600, d3.easePolyOut)
         .style('width', '400px')
     .transition()
-        .duration(600)
-        .ease(d3.easeBounceOut)
+        .call(configure, 0, 600, d3.easeBounceOut)
         .style('height', '500px')
     .transition()
-        .duration(1200)
-        .ease(d3.easeQuadOut)
+        .call(configure, 0, 1200, d3.easeQuadOut)
         .style('background-color', 'gold') ;
+
+function configure (transition, delay, duration, ease) {
+    return transition.delay(delay).duration(duration).ease(ease);
+}
     
