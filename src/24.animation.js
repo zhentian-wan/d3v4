@@ -79,6 +79,7 @@ svg.append('g')
 // enter: which in the data, but not yet on the page
 // upate: which in the data, and also in the page
 // exit: which not in the data, but exist on the page
+// end
 
 
 function render(subject = 'math') {
