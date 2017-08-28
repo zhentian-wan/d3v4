@@ -37,14 +37,14 @@ var data = [{
     },
     {
         name: 'David',
-        math: 44,
+        math: 144,
         science: null,
         language: 65
     },
     {
         name: 'Emily',
         math: 59,
-        science: 73,
+        science: 55,
         language: 29
     }
 ];
@@ -58,8 +58,9 @@ const yScale = d3.scaleLinear()
         0, 100
     ])
     .range([height, 0]);
-const yAxis = d3.axisLeft(yScale);
-svg.call(yAxis);
+const yAxis = svg
+    .append('g')
+    .call(d3.axisLeft(yScale));
 
 /**
  * x axis
@@ -91,15 +92,24 @@ function render(subject = 'math') {
         .data(data.filter(d => d[subject]), d => d.name); //d => d.name is a uniq idientifier
 
     // First: we want to remove the existing object which doesn't have any value
-        // Get rid of null value object
-        // Also animation y and height attr to produce
-        // fade out effect 
+    // Get rid of null value object
+    // Also animation y and height attr to produce
+    // fade out effect 
     update
         .exit()
         .transition(t)
         .attr('y', height)
         .attr('height', 0)
         .remove();
+
+    // Update the y axis with animation
+    yScale.domain(
+        [0, d3.max(data, d => d[subject])]
+    );
+    yAxis
+        .transition(t)
+        .delay(1000)
+        .call(d3.axisLeft(yScale));
 
     // Second, we want to animate the existing elements height    
     update
@@ -109,7 +119,7 @@ function render(subject = 'math') {
         .attr('height', d => height - yScale(d[subject]));
 
     // Last, for the new data which is not in the page before
-        // We want to animate    
+    // We want to animate    
     update
         .enter()
         .append('rect')
@@ -118,7 +128,7 @@ function render(subject = 'math') {
         .attr('x', d => xScale(d.name))
         .attr('width', d => xScale.bandwidth())
         .transition(t)
-        .delay(update.exit().size() ? 2000: 0) // If page refresh, we don't want to wait 2000ms
+        .delay(update.exit().size() ? 2000 : 0) // If page refresh, we don't want to wait 2000ms
         .attr('y', d => yScale(d[subject]))
         .attr('height', d => height - yScale(d[subject]));
 }
